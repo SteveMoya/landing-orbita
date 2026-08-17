@@ -1,0 +1,44 @@
+---
+import { testimonials } from '../../data/testimonials';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<Section id="opiniones" ariaLabelledBy="testimonials-title">
+  <div class="mb-14 max-w-2xl">
+    <p class="hud-label mb-3">Opiniones</p>
+    <h2
+      id="testimonials-title"
+      class="font-display text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
+    >
+      Palabras de <span class="bg-gradient-to-r from-ion to-pulse bg-clip-text text-transparent">quienes despegaron</span>
+    </h2>
+  </div>
+
+  <ul class="grid gap-6 md:grid-cols-3">
+    {
+      testimonials.map((t, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`}>
+          <Card glow="ion" class="flex h-full flex-col">
+            <div class="flex gap-1 text-orbit" role="img" aria-label="Valoración: 5 de 5 estrellas">
+              {Array.from({ length: 5 }).map(() => <Icon name="star" size={14} />)}
+            </div>
+            <blockquote class="mt-4 flex-1 text-[15px] leading-relaxed text-stardust/80">
+              “{t.quote}”
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 border-t border-stardust/10 pt-4">
+              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-ion/30 bg-ion/10 font-hud text-xs font-bold text-ion">
+                {t.initials}
+              </span>
+              <div>
+                <p class="font-display text-sm font-bold">{t.name}</p>
+                <p class="text-xs text-stardust/50">{t.role}</p>
+              </div>
+            </figcaption>
+          </Card>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

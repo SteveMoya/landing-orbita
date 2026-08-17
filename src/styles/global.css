@@ -1,0 +1,146 @@
+@import "tailwindcss";
+@import "@fontsource/orbitron/500.css";
+@import "@fontsource/orbitron/700.css";
+@import "@fontsource/orbitron/900.css";
+@import "@fontsource-variable/inter";
+
+/* ============================================================
+   ORBITA DESIGN SYSTEM — Tokens
+   Futurismo espacial: espacio profundo + neón.
+   ============================================================ */
+@theme {
+  /* Tipografías */
+  --font-display: "Orbitron", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-hud: "Orbitron", ui-monospace, monospace;
+
+  /* Colores */
+  --color-void: #05060f; /* fondo espacio */
+  --color-nebula: #1a1b33; /* superficies */
+  --color-ion: #5eead4; /* cian neón primario */
+  --color-pulse: #a78bfa; /* violeta secundario */
+  --color-stardust: #e8eaff; /* texto claro */
+  --color-orbit: #f59e0b; /* acento CTA */
+
+  /* Sombras neón */
+  --shadow-ion: 0 0 24px rgb(94 234 212 / 0.35);
+  --shadow-pulse: 0 0 24px rgb(167 139 250 / 0.3);
+  --shadow-card: 0 12px 40px rgb(0 0 0 / 0.45);
+
+  /* Animaciones */
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-twinkle: twinkle 3s ease-in-out infinite;
+  --animate-spin-slow: spin 24s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-void font-body text-stardust antialiased;
+  }
+
+  ::selection {
+    background: var(--color-ion);
+    color: var(--color-void);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ion);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* ============================================================
+   Utilidades de marca
+   ============================================================ */
+@layer components {
+  .container-orbita {
+    @apply mx-auto w-full max-w-6xl px-6 lg:px-8;
+  }
+
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+
+  /* Etiqueta HUD (monospace, tracking amplio) */
+  .hud-label {
+    @apply font-hud text-xs font-medium uppercase tracking-[0.25em] text-ion;
+  }
+}
+
+/* Header: base transparente + estado scrolled (fuera de @layer para no perder contra scoped) */
+[data-header] {
+  background: transparent;
+}
+
+[data-header].is-scrolled {
+  background: rgb(5 6 15 / 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgb(232 234 255 / 0.1);
+}
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

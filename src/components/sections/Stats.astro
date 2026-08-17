@@ -1,0 +1,38 @@
+---
+import { stats } from '../../data/stats';
+import Section from '../ui/Section.astro';
+---
+
+<Section id="resultados" ariaLabelledBy="stats-title" background="nebula">
+  <div class="mb-14 max-w-2xl">
+    <p class="hud-label mb-3">Resultados</p>
+    <h2 id="stats-title" class="font-display text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
+      Números de <span class="bg-gradient-to-r from-ion to-pulse bg-clip-text text-transparent">misión</span>
+    </h2>
+  </div>
+
+  <dl class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      stats.map((stat, index) => (
+        <div
+          data-reveal
+          style={`--reveal-delay:${index * 80}ms`}
+          class="rounded-3xl border border-stardust/10 bg-void/60 p-7 text-center transition-all duration-300 hover:-translate-y-1 hover:border-ion/30"
+        >
+          <dd class="font-display text-5xl font-black">
+            <span data-stat={stat.value} data-prefix={stat.prefix ?? ''} data-suffix={stat.suffix ?? ''}>
+              {stat.prefix}{stat.value}{stat.suffix}
+            </span>
+          </dd>
+          <dt class="mt-2 font-hud text-xs uppercase tracking-[0.2em] text-stardust/55">{stat.label}</dt>
+        </div>
+      ))
+    }
+  </dl>
+</Section>
+
+<script>
+  import { initStats } from '../../scripts/stats';
+
+  initStats();
+</script>

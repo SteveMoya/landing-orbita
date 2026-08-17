@@ -1,0 +1,22 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a
+  href="/"
+  aria-label="Órbita — inicio"
+  class:list={['group inline-flex items-center gap-2.5', className]}
+>
+  <!-- Marca: planeta con anillo -->
+  <span class="relative grid h-9 w-9 place-items-center" aria-hidden="true">
+    <span class="h-6 w-6 rounded-full bg-gradient-to-br from-ion to-pulse shadow-ion transition-transform duration-300 group-hover:scale-110"></span>
+    <span class="absolute h-9 w-9 rounded-full border border-ion/50 [transform:rotate(-20deg)_scaleX(1.4)] transition-transform duration-300 group-hover:rotate-[10deg]"></span>
+  </span>
+  <span class="font-display text-xl font-bold tracking-[0.2em] text-stardust transition-colors duration-200 group-hover:text-ion">
+    ÓRBITA
+  </span>
+</a>

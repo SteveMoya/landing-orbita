@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+---
+
+<BaseLayout title="Página no encontrada" description="La página que buscas no existe." noindex>
+  <section class="flex min-h-[80svh] flex-col items-center justify-center px-6 text-center">
+    <p class="hud-label mb-3">Señal perdida</p>
+    <h1 class="font-display text-5xl font-black tracking-tight sm:text-6xl">
+      4<span class="text-ion">0</span>4
+    </h1>
+    <p class="mt-4 max-w-md text-stardust/60">
+      Esta página abandonó la órbita. Volvamos a la base de control.
+    </p>
+    <Button href="/" class="mt-8">
+      Volver al inicio
+      <Icon name="rocket" size={16} />
+    </Button>
+  </section>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import { site } from '../../data/site';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<Section>
+  <div class="relative overflow-hidden rounded-[2.5rem] border border-ion/25 bg-nebula/60 px-6 py-20 text-center sm:px-16">
+    <!-- fondo: nebulosa + estrellas -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+      <div class="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-pulse/20 blur-[100px]"></div>
+      <div class="absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-ion/15 blur-[100px]"></div>
+      {Array.from({ length: 24 }).map((_, i) => (
+        <span
+          class="absolute animate-twinkle rounded-full bg-stardust"
+          style={`left:${(i * 37) % 100}%;top:${(i * 53) % 100}%;width:${(i % 3) + 1}px;height:${(i % 3) + 1}px;animation-delay:${(i % 5) * 0.4}s`}
+        ></span>
+      ))}
+    </div>
+
+    <div class="relative">
+      <p class="hud-label mb-4">Cuenta atrás iniciada</p>
+      <h2 class="mx-auto max-w-2xl font-display text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+        Tu asiento en la <span class="bg-gradient-to-r from-ion to-pulse bg-clip-text text-transparent">nave está esperando</span>
+      </h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-stardust/65">
+        Plazas limitadas por misión. Habla con nuestro equipo y reserva tu lugar en la próxima ventana de lanzamiento.
+      </p>
+      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <Button href={`mailto:${site.email}?subject=Quiero%20reservar%20una%20misi%C3%B3n`} size="lg">
+          Reservar misión
+          <Icon name="rocket" size={17} />
+        </Button>
+        <Button href="#destinos" variant="ghost" size="lg">
+          Ver destinos
+        </Button>
+      </div>
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,56 @@
+---
+import { site } from '../../data/site';
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="relative overflow-hidden bg-void pt-28 md:pt-32">
+  <!-- nebulosa de fondo -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div class="absolute -left-40 top-10 h-[480px] w-[480px] rounded-full bg-pulse/15 blur-[120px]"></div>
+    <div class="absolute -right-32 bottom-0 h-[420px] w-[420px] rounded-full bg-ion/10 blur-[120px]"></div>
+    <div class="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0b0d22] blur-[80px]"></div>
+  </div>
+
+  <div class="container-orbita relative grid items-center gap-12 pb-20 lg:grid-cols-2 lg:pb-28">
+    <div data-reveal>
+      <Badge class="mb-6">{site.hero.badge}</Badge>
+      <h1 class="font-display text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+        {site.hero.title.start}
+        <span class="bg-gradient-to-r from-ion to-pulse bg-clip-text text-transparent">{site.hero.title.accent}</span>
+      </h1>
+      <p class="mt-6 max-w-lg text-lg leading-relaxed text-stardust/65">{site.hero.subtitle}</p>
+      <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+        <Button href="#destinos" size="lg">
+          {site.hero.primaryCta}
+          <Icon name="rocket" size={17} />
+        </Button>
+        <Button href="#mision" variant="ghost" size="lg">
+          {site.hero.secondaryCta}
+        </Button>
+      </div>
+      <p class="mt-8 flex items-center gap-2 font-hud text-xs uppercase tracking-[0.2em] text-stardust/45">
+        <span class="inline-block h-2 w-2 animate-twinkle rounded-full bg-ion" aria-hidden="true"></span>
+        {site.hero.stat.value} {site.hero.stat.label} · transmisión en vivo
+      </p>
+    </div>
+
+    <!-- Planeta 3D (Three.js) con fallback CSS -->
+    <div data-reveal style="--reveal-delay:120ms" class="relative mx-auto h-[320px] w-[320px] sm:h-[420px] sm:w-[420px]">
+      <canvas data-planet-canvas class="h-full w-full" aria-label="Planeta 3D interactivo de Órbita" role="img"></canvas>
+      <!-- Fallback estático (reduced-motion / sin WebGL) -->
+      <div data-planet-fallback class="absolute inset-0 hidden" aria-hidden="true">
+        <div class="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-nebula via-[#23265a] to-pulse/60 shadow-pulse sm:h-64 sm:w-64"></div>
+        <div class="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ion/40 [transform:translate(-50%,-50%)_rotate(-20deg)_scaleX(1.45)] sm:h-88 sm:w-88"></div>
+        <div class="absolute left-1/2 top-1/2 h-88 w-88 -translate-x-1/2 -translate-y-1/2 rounded-full border border-pulse/30 [transform:translate(-50%,-50%)_rotate(30deg)_scaleX(1.6)] sm:h-104 sm:w-104"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initHeroPlanet } from '../../scripts/hero-planet';
+
+  initHeroPlanet();
+</script>

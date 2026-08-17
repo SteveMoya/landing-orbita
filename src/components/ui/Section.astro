@@ -1,0 +1,25 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+  background?: 'void' | 'nebula';
+  ariaLabelledBy?: string;
+}
+
+const { id, background = 'void', ariaLabelledBy, class: className } = Astro.props;
+
+const backgrounds = {
+  void: 'bg-void text-stardust',
+  nebula: 'bg-nebula/40 text-stardust',
+} as const;
+---
+
+<section
+  id={id}
+  aria-labelledby={ariaLabelledBy}
+  class:list={['section-pad scroll-mt-24', backgrounds[background], className]}
+>
+  <div class="container-orbita">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,35 @@
+---
+import { experiences } from '../../data/experiences';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<Section id="experiencias" ariaLabelledBy="experiences-title" background="nebula">
+  <div class="mb-14 max-w-2xl">
+    <p class="hud-label mb-3">Experiencias</p>
+    <h2
+      id="experiences-title"
+      class="font-display text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
+    >
+      Más que un vuelo: <span class="bg-gradient-to-r from-ion to-pulse bg-clip-text text-transparent">una misión completa</span>
+    </h2>
+    <p class="mt-4 text-lg text-stardust/60">Cada viaje incluye todo lo necesario para que solo te preocupes por mirar por la ventana.</p>
+  </div>
+
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      experiences.map((exp, index) => (
+        <li data-reveal style={`--reveal-delay:${(index % 3) * 80}ms`}>
+          <Card class="group h-full">
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-ion/25 bg-ion/10 text-ion transition-all duration-300 group-hover:scale-110 group-hover:shadow-ion">
+              <Icon name={exp.icon} size={22} />
+            </span>
+            <h3 class="mt-5 font-display text-lg font-bold tracking-tight">{exp.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-stardust/60">{exp.description}</p>
+          </Card>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

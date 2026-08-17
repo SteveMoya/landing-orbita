@@ -1,0 +1,24 @@
+---
+interface Props {
+  class?: string;
+  tone?: 'ion' | 'pulse' | 'orbit';
+}
+
+const { tone = 'ion', class: className } = Astro.props;
+
+const tones = {
+  ion: 'border-ion/30 text-ion bg-ion/10',
+  pulse: 'border-pulse/30 text-pulse bg-pulse/10',
+  orbit: 'border-orbit/30 text-orbit bg-orbit/10',
+} as const;
+---
+
+<span
+  class:list={[
+    'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-hud text-[11px] font-medium uppercase tracking-[0.15em]',
+    tones[tone],
+    className,
+  ]}
+>
+  <slot />
+</span>

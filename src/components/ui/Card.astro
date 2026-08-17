@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+  padded?: boolean;
+  glow?: 'ion' | 'pulse' | 'orbit' | 'stardust' | 'none';
+  as?: 'article' | 'div' | 'li';
+}
+
+const { padded = true, glow = 'none', as: Tag = 'div', class: className }: Props = Astro.props;
+
+const glows: Record<string, string> = {
+  none: 'border-stardust/10',
+  ion: 'border-ion/30 hover:shadow-ion',
+  pulse: 'border-pulse/30 hover:shadow-pulse',
+  orbit: 'border-orbit/30 hover:shadow-[0_0_24px_rgb(245_158_11/0.25)]',
+  stardust: 'border-stardust/25 hover:shadow-[0_0_24px_rgb(232_234_255/0.2)]',
+};
+---
+
+<Tag
+  class:list={[
+    'relative rounded-3xl border bg-nebula/70 shadow-card backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-1',
+    glows[glow],
+    padded && 'p-7',
+    className,
+  ]}
+>
+  <slot />
+</Tag>
