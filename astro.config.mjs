@@ -9,6 +9,12 @@ export default defineConfig({
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      // Evitar que Astro inlinee scripts pequeños en el HTML (default Vite 4096 B):
+      // la CSP `script-src 'self'` bloquea los <script> inline → el contenido
+      // quedaba con opacity:0 (reveal nunca corría). Con 0, todo script es externo.
+      assetsInlineLimit: 0,
+    },
   },
   security: {
     checkOrigin: true,
