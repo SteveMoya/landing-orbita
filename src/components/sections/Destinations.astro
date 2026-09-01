@@ -14,58 +14,74 @@ const toneGlow: Record<string, string> = {
 };
 ---
 
-<Section id="destinos" ariaLabelledBy="destinations-title">
-  <div class="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-    <div>
-      <p class="hud-label mb-3">Destinos</p>
-      <h2
-        id="destinations-title"
-        class="font-display text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
-      >
-        Elige tu <span class="bg-gradient-to-r from-ion to-pulse bg-clip-text text-transparent">próxima órbita</span>
-      </h2>
-    </div>
-    <p class="max-w-sm text-stardust/60">
-      Seis destinos, un protocolo de seguridad. Precios todo incluido: entrenamiento, traje, lanzamiento y estadía.
-    </p>
-  </div>
+<Section id="destinos" ariaLabelledBy="destinations-title" class="relative overflow-hidden">
+  <video
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-70"
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="metadata"
+    poster="/destinations-space.jpg"
+    aria-hidden="true"
+  >
+    <source src="/bg-space.mp4" type="video/mp4" />
+  </video>
+  <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-void/90 via-void/65 to-void/95"></div>
 
-  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {
-      destinations.map((dest, index) => (
-        <li
-          data-reveal
-          style={`--reveal-delay:${(index % 3) * 90}ms`}
-          class:list={[dest.featured && 'sm:col-span-2 lg:col-span-1']}
+  <div class="relative">
+    <div class="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <div>
+        <p class="hud-label mb-3">Destinos</p>
+        <h2
+          id="destinations-title"
+          class="font-display text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
         >
-          <Card glow={dest.tone} class:list={['group flex h-full flex-col', dest.featured && 'border-ion/50']}>
-            <div class="flex items-start justify-between gap-3">
-              <Icon
-                name={index === 0 ? 'satellite' : index === 1 ? 'moon' : index === 2 ? 'planet' : index === 3 ? 'telescope' : index === 4 ? 'signal' : 'rocket'}
-                size={28}
-                class:list={['shrink-0', toneGlow[dest.tone].split(' ')[0]]}
-              />
-              {dest.featured && <Badge tone="ion">Recomendado</Badge>}
-            </div>
-            <h3 class="mt-5 font-display text-xl font-bold tracking-tight">{dest.name}</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-stardust/60">{dest.description}</p>
-            <ul class="mt-4 flex flex-wrap gap-2">
-              {dest.tags.map((tag) => (
-                <li class="rounded-full border border-stardust/15 px-2.5 py-1 font-hud text-[10px] uppercase tracking-[0.12em] text-stardust/50">{tag}</li>
-              ))}
-            </ul>
-            <div class="mt-6 flex items-end justify-between border-t border-stardust/10 pt-5">
-              <div>
-                <p class="font-hud text-[10px] uppercase tracking-[0.2em] text-stardust/45">{dest.duration}</p>
-                <p class:list={['font-display text-2xl font-bold', toneGlow[dest.tone].split(' ')[0]]}>{dest.price}</p>
+          Elige tu <span class="bg-gradient-to-r from-ion to-pulse bg-clip-text text-transparent">próxima órbita</span>
+        </h2>
+      </div>
+      <p class="max-w-sm text-stardust/60">
+        Seis destinos, un protocolo de seguridad. Precios todo incluido: entrenamiento, traje, lanzamiento y estadía.
+      </p>
+    </div>
+
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        destinations.map((dest, index) => (
+          <li
+            data-reveal
+            style={`--reveal-delay:${(index % 3) * 90}ms`}
+            class:list={[dest.featured && 'sm:col-span-2 lg:col-span-1']}
+          >
+            <Card glow={dest.tone} class:list={['group flex h-full flex-col', dest.featured && 'border-ion/50']}>
+              <div class="flex items-start justify-between gap-3">
+                <Icon
+                  name={index === 0 ? 'satellite' : index === 1 ? 'moon' : index === 2 ? 'planet' : index === 3 ? 'telescope' : index === 4 ? 'signal' : 'rocket'}
+                  size={28}
+                  class:list={['shrink-0', toneGlow[dest.tone].split(' ')[0]]}
+                />
+                {dest.featured && <Badge tone="ion">Recomendado</Badge>}
               </div>
-              <Button href={`mailto:${'hola@orbita.space'}?subject=${encodeURIComponent(`Reserva ${dest.name}`)}`} variant="ghost" size="sm">
-                Reservar
-              </Button>
-            </div>
-          </Card>
-        </li>
-      ))
-    }
-  </ul>
+              <h3 class="mt-5 font-display text-xl font-bold tracking-tight">{dest.name}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-stardust/60">{dest.description}</p>
+              <ul class="mt-4 flex flex-wrap gap-2">
+                {dest.tags.map((tag) => (
+                  <li class="rounded-full border border-stardust/15 px-2.5 py-1 font-hud text-[10px] uppercase tracking-[0.12em] text-stardust/50">{tag}</li>
+                ))}
+              </ul>
+              <div class="mt-6 flex items-end justify-between border-t border-stardust/10 pt-5">
+                <div>
+                  <p class="font-hud text-[10px] uppercase tracking-[0.2em] text-stardust/45">{dest.duration}</p>
+                  <p class:list={['font-display text-2xl font-bold', toneGlow[dest.tone].split(' ')[0]]}>{dest.price}</p>
+                </div>
+                <Button href={`mailto:${'hola@orbita.space'}?subject=${encodeURIComponent(`Reserva ${dest.name}`)}`} variant="ghost" size="sm">
+                  Reservar
+                </Button>
+              </div>
+            </Card>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </Section>

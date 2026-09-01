@@ -6,15 +6,48 @@ import Icon from '../ui/Icon.astro';
 ---
 
 <Section id="experiencias" ariaLabelledBy="experiences-title" background="nebula">
-  <div class="mb-14 max-w-2xl">
-    <p class="hud-label mb-3">Experiencias</p>
-    <h2
-      id="experiences-title"
-      class="font-display text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
-    >
-      Más que un vuelo: <span class="bg-gradient-to-r from-ion to-pulse bg-clip-text text-transparent">una misión completa</span>
-    </h2>
-    <p class="mt-4 text-lg text-stardust/60">Cada viaje incluye todo lo necesario para que solo te preocupes por mirar por la ventana.</p>
+  <div class="mb-14 grid items-center gap-8 lg:grid-cols-[1.1fr_minmax(0,0.9fr)] lg:gap-12">
+    <div>
+      <p class="hud-label mb-3">Experiencias</p>
+      <h2
+        id="experiences-title"
+        class="font-display text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
+      >
+        Más que un vuelo: <span class="bg-gradient-to-r from-ion to-pulse bg-clip-text text-transparent">una misión completa</span>
+      </h2>
+      <p class="mt-4 text-lg text-stardust/60">Cada viaje incluye todo lo necesario para que solo te preocupes por mirar por la ventana.</p>
+    </div>
+
+    <div data-reveal class="relative overflow-hidden rounded-2xl border border-ion/25 shadow-pulse">
+      <img
+        src="/destinations-space.jpg"
+        alt="Estación orbital de Órbita en el espacio profundo"
+        loading="lazy"
+        class="h-full w-full object-cover"
+      />
+      <!-- Gradiente de lectura -->
+      <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-void/80 via-transparent to-void/40"></div>
+
+      <!-- HUD: marcos de esquina -->
+      <span aria-hidden="true" class="absolute left-3 top-3 h-7 w-7 border-l-2 border-t-2 border-ion/90"></span>
+      <span aria-hidden="true" class="absolute right-3 top-3 h-7 w-7 border-r-2 border-t-2 border-ion/90"></span>
+      <span aria-hidden="true" class="absolute bottom-3 left-3 h-7 w-7 border-b-2 border-l-2 border-ion/90"></span>
+      <span aria-hidden="true" class="absolute bottom-3 right-3 h-7 w-7 border-b-2 border-r-2 border-ion/90"></span>
+
+      <!-- HUD: línea de escaneo -->
+      <div aria-hidden="true" class="absolute inset-x-0 top-1/2 h-px animate-[scanline_6s_linear_infinite] bg-gradient-to-r from-transparent via-ion/80 to-transparent"></div>
+
+      <!-- HUD: etiqueta -->
+      <span class="absolute left-4 top-4 font-hud text-[10px] uppercase tracking-[0.2em] text-ion">
+        SECTOR ▸ 07 · ORBITAL
+      </span>
+
+      <div class="absolute inset-x-0 bottom-0 p-4">
+        <p class="font-hud text-[10px] uppercase tracking-[0.2em] text-stardust/75">
+          Telemetría ▸ {experiences.length} misiones · Protocolos de seguridad activos
+        </p>
+      </div>
+    </div>
   </div>
 
   <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -33,3 +66,22 @@ import Icon from '../ui/Icon.astro';
     }
   </ul>
 </Section>
+
+<style>
+  @keyframes scanline {
+    0% {
+      top: 0%;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+</style>
